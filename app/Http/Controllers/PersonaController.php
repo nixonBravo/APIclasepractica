@@ -13,13 +13,22 @@ class PersonaController extends Controller
      */
     public function index()
     {
-       $persnas = DB::table('personas')
+       /* $persnas = DB::table('personas')
         ->join('users', 'personas.id', '=', 'users.persona_id')
         ->join('rols', 'users.rol_id', '=', 'rols.id')
         ->select('personas.*', 'users.name', 'rols.rol')
         ->get();
         return response()->json([
             'personas' => $persnas,
+        ]); */
+        $users = DB::table('users')
+        ->join('personas', 'users.persona_id', '=', 'personas.id')
+        ->join('rols', 'users.rol_id', '=', 'rols.id')
+        ->select('personas.nombre', 'users.name', 'rols.rol')
+        ->where('estado', true)
+        ->get();
+        return response()->json([
+            'users' => $users,
         ]);
     }
 

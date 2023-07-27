@@ -21,7 +21,9 @@ return new class extends Migration
             $table->foreignId('rol_id')
             ->constrained('rols');
             $table->foreignId('persona_id')
-            ->constrained('personas');
+            ->constrained('personas')
+            ->onDelete(null);
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
